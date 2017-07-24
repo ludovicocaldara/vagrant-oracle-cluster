@@ -27,26 +27,8 @@ clusters = [
   :pubscan_start => 71,
   :prvlan  => IPAddr.new("172.18.100.0/24"),
   :prvlan_start => 51,
-  :hd_num  => 2,
-  :hd_mb   => 2048,
-  :grid   => "yes" # configure additionally the DNS, cvuqdisk, etc.
-  },
-  {
-  :prefix  => "beta",
-  :domain  => "trivadistraining.com",
-  :box     => "ludodba/ol7.3-base",
-  #:box_version => "0.1",
-  :nodes   => 2,
-  :cpu     => 1,
-  :mem     => 2048,
-  :publan  => IPAddr.new("192.168.56.0/24"),
-  :publan_start => 101,
-  :pubvip_start => 111,
-  :pubscan_start => 121,
-  :prvlan  => IPAddr.new("172.18.101.0/24"),
-  :prvlan_start => 101,
-  :hd_num  => 2,
-  :hd_mb   => 2048,
+  :hd_num  => 6,
+  :hd_mb   => 4096,
   :grid   => "yes" # configure additionally the DNS, cvuqdisk, etc.
   }
 ]
@@ -335,7 +317,7 @@ Vagrant.configure(2) do |config|
         prvip = clu[:prvlan].|(clu[:prvlan_start]+nid-1).to_s
 
         config.vm.provider :virtualbox do |vb|
-          vb.linked_clone = true
+          #vb.linked_clone = true
           vb.name = vm_name
           vb.gui = true
           vb.customize ["modifyvm", :id, "--memory", clu[:mem]]
